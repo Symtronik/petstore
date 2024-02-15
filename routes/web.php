@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PetstoreApiController;
+use App\Http\Controllers\OrderApiController;
+use App\Http\Controllers\UserApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,7 @@ Route::get('/', function () {
     return view('layout');
 });
 
-Route::get('/api', [PetstoreApiController::class, 'index']);
+Route::get('/pet', [PetstoreApiController::class, 'index']) -> name('components.pet');
+Route::get('/order', [OrderApiController::class, 'index']) -> name('components.order');
+Route::get('/user', [UserApiController::class, 'index']) -> name('components.user');
+
