@@ -9,6 +9,8 @@
         @endif
     </div>
     <div class="row">
+        <a href="/pet/add" class="btn btn-primary" style="width: 200px;">Add Pet</a>
+
         <h1>Pet Details</h1>
         @if (isset($petData[0]))
             @foreach ($petData as $pet)
@@ -50,7 +52,7 @@
                         </td>
                     </tr>
                 </table>
-                <form method="POST" id="test" action="{{ route('components.pet.delete', $pet['id']) }}">
+                <form method="POST" id="test" action="{{ route('partials.pet.delete', $pet['id']) }}">
                     @csrf
                     @method('delete')
                     <button class="ms-1 btn btn-danger btn-sm"> Delete </button>
@@ -98,7 +100,7 @@
                         </td>
                     </tr>
                 </table>
-                <form method="POST" action="{{ route('components.pet.delete', $petData['id']) }}">
+                <form method="POST" action="{{ route('partials.pet.delete', $petData['id']) }}">
                     @csrf
                     @method('delete')
                     <button class="ms-1 btn btn-danger btn-sm"> Delete </button>

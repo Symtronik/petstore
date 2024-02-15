@@ -16,13 +16,13 @@ use App\Http\Controllers\UserApiController;
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
-});
 
-Route::get('/pet', [PetstoreApiController::class, 'index']) -> name('components.pet');
-Route::get('/pet/search', [PetstoreApiController::class, 'search']) -> name('components.pet');
-Route::delete('/pet/delete/{id}', [PetstoreApiController::class, 'delete']) -> name('components.pet.delete');
-Route::get('/order', [OrderApiController::class, 'index']) -> name('components.order');
-Route::get('/user', [UserApiController::class, 'index']) -> name('components.user');
+
+Route::get('/', [PetstoreApiController::class, 'index']) -> name('partials.pet');
+Route::get('/pet/add', function () {return view('partials.petAdd');});
+Route::post('/', [PetstoreApiController::class, 'add']) -> name('partials.pet.add');
+Route::get('/pet/search', [PetstoreApiController::class, 'search']) -> name('partials.pet');
+Route::delete('/pet/delete/{id}', [PetstoreApiController::class, 'delete']) -> name('partials.pet.delete');
+Route::get('/order', [OrderApiController::class, 'index']) -> name('partials.order');
+Route::get('/user', [UserApiController::class, 'index']) -> name('partials.user');
 
