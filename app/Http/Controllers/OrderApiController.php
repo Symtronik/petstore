@@ -10,6 +10,6 @@ class OrderApiController extends Controller
     {
         // $response = Http::get('https://petstore.swagger.io/v2/pet/2')->json();
         // return $response;
-        return view('components.order');
+        return view('partials.order');
     }
 }
