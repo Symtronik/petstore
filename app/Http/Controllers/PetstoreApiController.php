@@ -6,13 +6,33 @@ use Illuminate\Http\Request;
 
 class PetstoreApiController extends Controller
 {
+
     public function index()
     {
-        if(request()->has('search')){
-            $response = Http::get('https://petstore.swagger.io/v2/pet/'.request()->get('search', ''))->json();
+        // $response = Http::get('https://petstore.swagger.io/v2/pet/2')->json();
+        // return $response;
+        return view('partials.pet');
+    }
+
+    public function search()
+    {
+        $searchValue = request()->get('search', '');
+
+        if(is_numeric($searchValue)){
+            $response = Http::get('https://petstore.swagger.io/v2/pet/'.$searchValue)->json();
+            return view('partials.pet', ['petData' => $response]);
+        } else {
+            if(in_array($searchValue, ['available', 'pending', 'sold'])) {
+                $response = Http::get('https://petstore.swagger.io/v2/pet/findByStatus?status='.$searchValue)->json();
+                return view('partials.pet', ['petData' => $response]);
+
+
+            } else {
+                return view('partials.pet', ['error' => "Status does't exist"]);
+            }
         }
 
-        return view('partials.pet', ['petData' => $response]);
+
     }
 
     public function delete($id){
