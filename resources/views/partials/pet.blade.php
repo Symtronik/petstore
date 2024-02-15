@@ -1,7 +1,13 @@
 @extends('layout')
 
 @section('content')
-
+      <div class="row">
+            @if (isset($message))
+                <p class="text-success">{{ $message }}</p>
+            @elseif (isset($error))
+                <p class="text-danger">{{ $error }}</p>
+            @endif
+      </div>
       <div class="row">
         <h1>Pet Details</h1>
         @if ( isset($petData['id']) && $petData['id'] )
@@ -19,13 +25,15 @@
             @endif
 
             @if ( isset($petData['category']['name']) && $petData['category']['name'] )
-                <p>Category name {{ $petData['category']['name'] }}
+                <p>Category name {{ $petData['category']['name'] }}</p>
             @else
                 <p>Category name: does not exist</p>
             @endif
 
             @if ( isset($petData['photoUrls']) && $petData['photoUrls'] )
-                <p>Photo <img src="{{ $petData['photoUrls']  }}">
+                <@foreach ($petData['photoUrls'] as $photoUrl)
+                    <p><img src="{{ $photoUrl }}"></p>
+                @endforeach
             @else
                 <p>Photo: does not exist</p>
             @endif
@@ -39,6 +47,13 @@
             @else
                 <p>Tags: does not exist </p>
             @endif
+
+            <form method="POST" action="{{ route('components.pet.delete', $petData['id']) }}">
+                    @csrf
+                    @method('delete')
+                    <button class="ms-1 btn btn-danger btn-sm"> Delete </button>
+            </form>
+
         @else
             <p>The entry does not exist</p>
         @endif

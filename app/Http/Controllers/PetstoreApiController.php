@@ -14,4 +14,15 @@ class PetstoreApiController extends Controller
 
         return view('partials.pet', ['petData' => $response]);
     }
+
+    public function delete($id){
+
+        $response = Http::delete('https://petstore.swagger.io/v2/pet/'.$id);
+
+        if ($response->successful()) {
+            return view('partials.pet', ['message' => 'Pet successfully deleted']);
+        } else {
+            return view('partials.pet', ['error' => 'Failed to delete pet']);
+        }
+    }
 }

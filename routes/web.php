@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/pet', [PetstoreApiController::class, 'index']) -> name('components.pet');
+Route::delete('/pet/delete/{id}', [PetstoreApiController::class, 'delete']) -> name('components.pet.delete');
 Route::get('/order', [OrderApiController::class, 'index']) -> name('components.order');
 Route::get('/user', [UserApiController::class, 'index']) -> name('components.user');
 
