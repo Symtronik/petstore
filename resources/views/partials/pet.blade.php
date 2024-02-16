@@ -100,11 +100,19 @@
                         </td>
                     </tr>
                 </table>
-                <form method="POST" action="{{ route('partials.pet.delete', $petData['id']) }}">
-                    @csrf
-                    @method('delete')
-                    <button class="ms-1 btn btn-danger btn-sm"> Delete </button>
-                </form>
+                <div class="row">
+                    <div class="col-1 justify-content-start">
+                        <form method="POST" action="{{ route('partials.pet.delete', $petData['id']) }}" ">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <a href={{ route('partials.pet.edit', $petData['id']) }} class="btn btn-primary btn-sm" style="display: inline-block;">Edit</a>
+                    </div>
+                </div>
+
               @else
                  <p>The entry does not exist</p>
               @endif
